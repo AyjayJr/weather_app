@@ -9,7 +9,7 @@ body {
   background-color: #3D5A80;
 }
 
-.container {
+.content {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,6 +23,15 @@ body {
   border-radius: 1em;
   background-color: var(--light-blue);
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: min-content;
+  min-height: min-content;
+}
+
+.search-box {
+  display:flex;
   align-items: center;
   justify-content: center;
   min-width: min-content;

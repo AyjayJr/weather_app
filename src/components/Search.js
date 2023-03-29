@@ -14,7 +14,7 @@ const Search = (props) => {
 
 
 	return (
-			<form>
+			<form className='search-box'>
 			<img 
 				className='location-pin'
 				src="./images/location.png" />
