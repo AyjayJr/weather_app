@@ -1,8 +1,20 @@
+import { useState } from 'react';
 
-const Search = () => {
+const Search = (props) => {
+	const [location, setLocation] = useState('');
+
+	const inputHandler = (e) => {
+		setLocation(e.target.value);
+	};
+
+	const buttonHandler = (e) => {
+		e.preventDefault();
+		props.onSubmit(location);
+	};
+
 
 	return (
-		<div className='card'>
+			<form className='card'>
 			<img 
 				className='location-pin'
 				src="./images/location.png" />
@@ -10,9 +22,15 @@ const Search = () => {
 				className='search-bar'
 				type='text'
 				placeholder='Enter your location'
+				value={location}
+				onChange={inputHandler}
 			/>
-			<button className='search-button'></button>
-		</div>
+			<button
+				className='search-button'
+				onClick={buttonHandler}
+			>
+			</button>
+			</form>
 	);
 };
 
