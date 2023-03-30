@@ -28,6 +28,7 @@ body {
   justify-content: center;
   min-width: min-content;
   min-height: min-content;
+  box-shadow: 2px 2px 5px black;
 }
 
 .search-box {
