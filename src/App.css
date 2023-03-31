@@ -79,3 +79,7 @@ body {
   border: 0;
   cursor: pointer;
 }
+
+p {
+  font-weight: bold;
+}
