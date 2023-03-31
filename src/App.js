@@ -13,18 +13,28 @@ function App() {
 
     // get lat and longitude of location
     // TODO: refactor to accept country and state codes
-    const response = await fetch(
+    let coordinates;
+    try {
+      const response = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${API_KEY}`);
 
-    const data = await response.json();
-    console.log(data);
 
-    const coordinates = data.map((data) => {
+      const data = await response.json();
+      coordinates = data.map((data) => {
       return {
         lat: data.lat,
         lon: data.lon
       }
-    })
+      })
+
+      if (!response.ok) {
+        throw new Error('ERROR: something went wrong with the request.');
+      }
+    }
+    catch (e) {
+      console.log(e);
+    }
+  
     
     // get weather data for lat and lon
     const weatherResponse = await fetch(
