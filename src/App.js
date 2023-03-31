@@ -10,44 +10,56 @@ function App() {
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   const sendRequest = async (location) => {
-
+    let data;
+    let weather;
+    let response;
+    let coordinates;
+    
     // get lat and longitude of location
     // TODO: refactor to accept country and state codes
-    let coordinates;
     try {
-      const response = await fetch(
+      response = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${API_KEY}`);
 
+      if (!response.ok) {
+        throw new Error('ERROR: something went wrong with the geo-coding request.');
+      }
 
-      const data = await response.json();
+      data = await response.json();
       coordinates = data.map((data) => {
       return {
         lat: data.lat,
         lon: data.lon
       }
       })
-
-      if (!response.ok) {
-        throw new Error('ERROR: something went wrong with the request.');
-      }
     }
-    catch (e) {
-      console.log(e);
+    catch (error) {
+      console.log(error.message);
     }
   
     
     // get weather data for lat and lon
-    const weatherResponse = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates[0].lat}&lon=${coordinates[0].lon}&appid=${API_KEY}&units=imperial`
-    ) 
+    try {
+      response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates[0].lat}&lon=${coordinates[0].lon}&appid=${API_KEY}&units=imperial`
+      ) 
 
-    const weatherData = await weatherResponse.json();
+      if (!response.ok) {
+        throw new Error('ERROR: something went wrong with the weather request.')
+      }
 
-    const weather = {
-      temp: weatherData.main.temp,
-      wind: weatherData.wind.speed,
-      humidity: weatherData.main.humidity,
-    } 
+      data = await response.json();
+
+      weather = {
+        temp: data.main.temp,
+        wind: data.wind.speed,
+        humidity: data.main.humidity,
+        description: data.weather[0].description
+      } 
+    }
+    catch (error) {
+      console.log(error.message);
+    }
 
     setWeather(weather);
     setValidResopnse(true);
@@ -59,7 +71,7 @@ function App() {
     <div className='content'>
       <div className='card'>
         <Search onSubmit={sendRequest} />
-        {validResponse && <p>temp: {weather.temp} humidity: {weather.humidity} wind: {weather.wind}</p>}
+        {validResponse && <p>description: {weather.description} temp: {weather.temp} humidity: {weather.humidity} wind: {weather.wind}</p>}
       </div>
     </div>
   );
