@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Search from './components/Search';
 import './App.css';
+import WeatherInfo from './components/WeatherInfo';
 
 function App() {
   const [weather, setWeather] = useState({});
@@ -71,7 +72,7 @@ function App() {
     <div className='content'>
       <div className='card'>
         <Search onSubmit={sendRequest} />
-        {validResponse && <p>description: {weather.description} temp: {weather.temp} humidity: {weather.humidity} wind: {weather.wind}</p>}
+        {validResponse && <WeatherInfo weather={weather}/>}
       </div>
     </div>
   );
