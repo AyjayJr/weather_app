@@ -52,6 +52,7 @@ function App() {
       data = await response.json();
 
       weather = {
+        icon: data.weather[0].icon,
         temp: data.main.temp,
         wind: data.wind.speed,
         humidity: data.main.humidity,
