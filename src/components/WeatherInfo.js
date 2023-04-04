@@ -18,8 +18,8 @@ const WeatherInfo = props => {
 	return (
 		<div>
 			<img src={image} width='100px' height='100px' />
-			<p>description: {props.weather.description}</p>
-			<p>temp: {props.weather.temp}</p>
+			<p>{props.weather.description}</p>
+			<p>{props.weather.temp} &#8457;</p>
 			<p>humidity: {props.weather.humidity}</p>
 			<p>wind speed: {props.weather.wind}</p>
 		</div>

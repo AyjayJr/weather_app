@@ -29,6 +29,7 @@ body {
   min-width: min-content;
   min-height: min-content;
   box-shadow: 2px 2px 5px black;
+  transition: all .5s ease-in-out;
 }
 
 .search-box {
